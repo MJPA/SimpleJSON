@@ -35,6 +35,12 @@
 #include <string>
 #include <map>
 
+// Linux compile fix - from quaker66
+#ifndef WIN32
+	#include <cstring> 
+	#include <cstdlib>
+#endif
+
 // Custom types
 class JSONValue;
 typedef std::vector<JSONValue*> JSONArray;
