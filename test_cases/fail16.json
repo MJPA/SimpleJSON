@@ -1,0 +1,2 @@
+Arrays must not have comma after last value
+["extra comma",]

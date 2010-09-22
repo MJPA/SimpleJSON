@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JSONDemo", "JSONDemo.vcproj", "{06DE72C5-3E2A-4DFC-A60E-69B8471E8AC1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06DE72C5-3E2A-4DFC-A60E-69B8471E8AC1}.Release|Win32.ActiveCfg = Release|Win32
+		{06DE72C5-3E2A-4DFC-A60E-69B8471E8AC1}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
