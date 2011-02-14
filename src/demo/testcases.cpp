@@ -115,5 +115,19 @@ void run_tests()
 	run_test_type(true);
 	run_test_type(false);
 	
+	// Static test for a very precise decimal number
+	double precise_decimal = 40.9358215191158457340974;
+	JSONValue *json_value = JSON::Parse("40.9358215191158457340974");
+	wstring decimal_output = wstring(L"| Very precise decimal number") + wstring(DESC_LENGTH - 27, L' ') + wstring(L" | ");
+	if (json_value && json_value->IsNumber() && json_value->AsNumber() == precise_decimal)
+	{
+		decimal_output += wstring(L"passed |\r\n");
+	}
+	else
+	{
+		decimal_output += wstring(L"failed |\r\n");
+	}
+	print_out(decimal_output.c_str());
+	
 	print_out(vert_sep.c_str());
 }
