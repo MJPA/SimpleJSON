@@ -255,10 +255,11 @@ bool JSON::ExtractString(const wchar_t **data, std::wstring &str)
  *
  * @return int Returns the int value of the number found
  */
-int JSON::ParseInt(const wchar_t **data)
+double JSON::ParseInt(const wchar_t **data)
 {
-	int integer = 0;
+	double integer = 0;
 	while (**data != 0 && **data >= '0' && **data <= '9')
 		integer = integer * 10 + (*(*data)++ - '0');
+	
 	return integer;
 }

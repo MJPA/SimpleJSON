@@ -78,7 +78,7 @@ class JSON
 	protected:
 		static bool SkipWhitespace(const wchar_t **data);
 		static bool ExtractString(const wchar_t **data, std::wstring &str);
-		static int ParseInt(const wchar_t **data);
+		static double ParseInt(const wchar_t **data);
 	private:
 		JSON();
 };

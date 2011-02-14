@@ -86,7 +86,7 @@ JSONValue *JSONValue::Parse(const wchar_t **data)
 		if (**data == L'0')
 			(*data)++;
 		else if (**data >= L'1' && **data <= L'9')
-			number = (double)JSON::ParseInt(data);
+			number = JSON::ParseInt(data);
 		else
 			return NULL;
 		
@@ -100,8 +100,8 @@ JSONValue *JSONValue::Parse(const wchar_t **data)
 				return NULL;
 			
 			// Find the decimal and sort the decimal place out
-			double decimal = (double)JSON::ParseInt(data);
-			while((int)decimal > 0) decimal /= 10.0f;
+			double decimal = JSON::ParseInt(data);
+			while(decimal > 1.0) decimal /= 10.0;
 
 			// Save the number
 			number += decimal;
@@ -125,9 +125,9 @@ JSONValue *JSONValue::Parse(const wchar_t **data)
 				return NULL;
 
 			// Sort the expo out
-			int expo = JSON::ParseInt(data);
-			for (int i = 0; i < expo; i++)
-				number = neg_expo ? (number / 10.0) : (number * 10);
+			double expo = JSON::ParseInt(data);
+			for (double i = 0.0; i < expo; i++)
+				number = neg_expo ? (number / 10.0) : (number * 10.0);
 		}
 
 		// Was it neg?
