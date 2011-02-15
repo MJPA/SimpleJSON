@@ -18,6 +18,7 @@ $(EXECUTABLE):	$(OBJECTS)
 		$(CC) $(LFLAGS) $(OBJECTS) -o $@
 
 obj/%.o:	src/%.cpp
+		@test -d $(@D) || mkdir -p $(@D)
 		$(CC) $(CFLAGS) $(@:obj/%.o=src/%.cpp) -o $@
 
 clean:
