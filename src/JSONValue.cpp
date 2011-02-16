@@ -100,9 +100,10 @@ JSONValue *JSONValue::Parse(const wchar_t **data)
 				return NULL;
 			
 			// Find the decimal and sort the decimal place out
-			double decimal = JSON::ParseInt(data);
-			while(decimal > 1.0) decimal /= 10.0;
-
+			// Use ParseDecimal as ParseInt won't work with decimals less than 0.1
+			// thanks to Javier Abadia for the report & fix
+			double decimal = JSON::ParseDecimal(data);
+			
 			// Save the number
 			number += decimal;
 		}
