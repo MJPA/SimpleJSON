@@ -116,18 +116,33 @@ void run_tests()
 	run_test_type(false);
 	
 	// Static test for a very precise decimal number
-	double precise_decimal = 40.9358215191158457340974;
+	double decimal = 40.9358215191158457340974;
 	JSONValue *json_value = JSON::Parse("40.9358215191158457340974");
-	wstring decimal_output = wstring(L"| Very precise decimal number") + wstring(DESC_LENGTH - 27, L' ') + wstring(L" | ");
-	if (json_value && json_value->IsNumber() && json_value->AsNumber() == precise_decimal)
+	wstring test_output = wstring(L"| Very precise decimal number") + wstring(DESC_LENGTH - 27, L' ') + wstring(L" | ");
+	if (json_value && json_value->IsNumber() && json_value->AsNumber() == decimal)
 	{
-		decimal_output += wstring(L"passed |\r\n");
+		test_output += wstring(L"passed |\r\n");
+		delete json_value;
 	}
 	else
 	{
-		decimal_output += wstring(L"failed |\r\n");
+		test_output += wstring(L"failed |\r\n");
 	}
-	print_out(decimal_output.c_str());
+	print_out(test_output.c_str());
+	
+	// Static test for a decimal number with leading zeros
+	decimal = 1.00034985734000;
+	json_value = JSON::Parse("1.00034985734000");
+	test_output = wstring(L"| Decimal number with leading zeros") + wstring(DESC_LENGTH - 33, L' ') + wstring(L" | ");
+	if (json_value && json_value->IsNumber() && json_value->AsNumber() == decimal)
+	{
+		test_output += wstring(L"passed |\r\n");
+	}
+	else
+	{
+		test_output += wstring(L"failed |\r\n");
+	}
+	print_out(test_output.c_str());
 	
 	print_out(vert_sep.c_str());
 }
