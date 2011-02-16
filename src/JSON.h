@@ -79,6 +79,7 @@ class JSON
 		static bool SkipWhitespace(const wchar_t **data);
 		static bool ExtractString(const wchar_t **data, std::wstring &str);
 		static double ParseInt(const wchar_t **data);
+		static double ParseDecimal(const wchar_t **data);
 	private:
 		JSON();
 };
