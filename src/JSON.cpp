@@ -253,7 +253,7 @@ bool JSON::ExtractString(const wchar_t **data, std::wstring &str)
  *
  * @param wchar_t** data Pointer to a wchar_t* that contains the JSON text
  *
- * @return int Returns the int value of the number found
+ * @return double Returns the double value of the number found
  */
 double JSON::ParseInt(const wchar_t **data)
 {
@@ -262,4 +262,26 @@ double JSON::ParseInt(const wchar_t **data)
 		integer = integer * 10 + (*(*data)++ - '0');
 	
 	return integer;
+}
+
+/** 
+ * Parses some text as though it is a decimal
+ *
+ * @access protected
+ *
+ * @param wchar_t** data Pointer to a wchar_t* that contains the JSON text
+ *
+ * @return double Returns the double value of the decimal found
+ */
+double JSON::ParseDecimal(const wchar_t **data)
+{
+	double decimal = 0.0;
+  double factor = 0.1;
+	while (**data != 0 && **data >= '0' && **data <= '9')
+  {
+    int digit = (*(*data)++ - '0');
+		decimal = decimal + digit * factor;
+    factor *= 0.1;
+  }
+	return decimal;
 }
