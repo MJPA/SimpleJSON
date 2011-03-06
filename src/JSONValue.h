@@ -41,33 +41,33 @@ class JSONValue
 	public:
 		JSONValue(/*NULL*/);
 		JSONValue(const wchar_t *m_char_value);
-		JSONValue(std::wstring m_string_value);
+		JSONValue(const std::wstring &m_string_value);
 		JSONValue(bool m_bool_value);
 		JSONValue(double m_number_value);
-		JSONValue(JSONArray m_array_value);
-		JSONValue(JSONObject m_object_value);
+		JSONValue(const JSONArray &m_array_value);
+		JSONValue(const JSONObject &m_object_value);
 		~JSONValue();
 		
-		bool IsNull();
-		bool IsString();
-		bool IsBool();
-		bool IsNumber();
-		bool IsArray();
-		bool IsObject();
+		bool IsNull() const;
+		bool IsString() const;
+		bool IsBool() const;
+		bool IsNumber() const;
+		bool IsArray() const;
+		bool IsObject() const;
 		
-		std::wstring AsString();
-		bool AsBool();
-		double AsNumber();
-		JSONArray AsArray();
-		JSONObject AsObject();
+		std::wstring AsString() const;
+		bool AsBool() const;
+		double AsNumber() const;
+		JSONArray AsArray() const;
+		JSONObject AsObject() const;
 		
-		std::wstring Stringify();
+		std::wstring Stringify() const;
 		
 	protected:
 		static JSONValue *Parse(const wchar_t **data);
 	
 	private:
-		static std::wstring StringifyString(std::wstring str);
+		static std::wstring StringifyString(const std::wstring &str);
 	
 		JSONType type;
 		std::wstring string_value;

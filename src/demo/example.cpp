@@ -31,7 +31,7 @@
 using namespace std;
 
 // Just some sample JSON text, feel free to change but could break demo
-wchar_t* EXAMPLE = L"\
+const wchar_t* EXAMPLE = L"\
 { \
 	\"string_name\" : \"string\tvalue and a \\\"quote\\\" and a unicode char \\u00BE and a c:\\\\path\\\\ or a \\/unix\\/path\\/ :D\", \
 	\"bool_name\" : true, \

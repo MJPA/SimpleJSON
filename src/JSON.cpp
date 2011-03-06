@@ -109,7 +109,7 @@ JSONValue *JSON::Parse(const wchar_t *data)
  *
  * @return std::wstring Returns a JSON encoded string representation of the given value
  */
-std::wstring JSON::Stringify(JSONValue *value)
+std::wstring JSON::Stringify(const JSONValue *value)
 {
 	if (value != NULL)
 		return value->Stringify();

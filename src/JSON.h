@@ -74,7 +74,7 @@ class JSON
 	public:
 		static JSONValue* Parse(const char *data);
 		static JSONValue* Parse(const wchar_t *data);
-		static std::wstring Stringify(JSONValue *value);
+		static std::wstring Stringify(const JSONValue *value);
 	protected:
 		static bool SkipWhitespace(const wchar_t **data);
 		static bool ExtractString(const wchar_t **data, std::wstring &str);
