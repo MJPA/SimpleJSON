@@ -55,11 +55,11 @@ class JSONValue
 		bool IsArray() const;
 		bool IsObject() const;
 		
-		std::wstring AsString() const;
+		const std::wstring &AsString() const;
 		bool AsBool() const;
 		double AsNumber() const;
-		JSONArray AsArray() const;
-		JSONObject AsObject() const;
+		const JSONArray &AsArray() const;
+		const JSONObject &AsObject() const;
 		
 		std::wstring Stringify() const;
 		

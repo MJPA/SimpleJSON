@@ -493,7 +493,7 @@ bool JSONValue::IsObject() const
  *
  * @return std::wstring Returns the string value
  */
-std::wstring JSONValue::AsString() const
+const std::wstring &JSONValue::AsString() const
 {
 	return string_value;
 }
@@ -532,7 +532,7 @@ double JSONValue::AsNumber() const
  *
  * @return JSONArray Returns the array value
  */
-JSONArray JSONValue::AsArray() const
+const JSONArray &JSONValue::AsArray() const
 {
 	return array_value;
 }
@@ -545,7 +545,7 @@ JSONArray JSONValue::AsArray() const
  *
  * @return JSONObject Returns the object value
  */
-JSONObject JSONValue::AsObject() const
+const JSONObject &JSONValue::AsObject() const
 {
 	return object_value;
 }
