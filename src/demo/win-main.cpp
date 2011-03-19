@@ -96,7 +96,7 @@ int CALLBACK DialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				}
 
 				case IDC_EX1:
-					extern wchar_t *EXAMPLE;
+					extern const wchar_t *EXAMPLE;
 					SetWindowText(GetDlgItem(hDlg, IDC_INPUT), EXAMPLE);
 					example1();
 					break;
