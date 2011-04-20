@@ -147,7 +147,6 @@ bool JSON::SkipWhitespace(const wchar_t **data)
  */
 bool JSON::ExtractString(const wchar_t **data, std::wstring &str)
 {
-	size_t str_length = 0;
 	str = L"";
 	
 	while (**data != 0)
@@ -223,16 +222,6 @@ bool JSON::ExtractString(const wchar_t **data, std::wstring &str)
 		{
 			// SPEC Violation: Allow tabs due to real world cases
 			return false;
-		}
-		
-		// String will be one longer - do it before memory size check
-		str_length++;
-		
-		// Need more memory?
-		if (str_length > str.capacity())
-		{
-			str_length += 256;
-			str.reserve(str_length);
 		}
 		
 		// Add the next char
