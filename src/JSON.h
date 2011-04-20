@@ -26,7 +26,7 @@
 #define _JSON_H_
 
 // Win32 incompatibilities
-#ifdef WIN32
+#if defined(WIN32) && !defined(__GNUC__)
 	#define wcsncasecmp _wcsnicmp 
 	static inline bool isnan(double x) { return x != x; }
 	static inline bool isinf(double x) { return !isnan(x) && isnan(x - x); }
@@ -43,7 +43,7 @@
 #endif
 
 // Mac compile fixes - from quaker66
-#if defined(__APPLE__)
+#if defined(__APPLE__) || (defined(WIN32) && defined(__GNUC__))
 	#include <wctype.h>
 	#include <wchar.h>
 	#include <algorithm>
