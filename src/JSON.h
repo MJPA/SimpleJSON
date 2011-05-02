@@ -37,7 +37,7 @@
 #include <map>
 
 // Linux compile fix - from quaker66
-#ifndef WIN32
+#ifdef __GNUC__
 	#include <cstring> 
 	#include <cstdlib>
 #endif
