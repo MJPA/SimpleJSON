@@ -60,6 +60,20 @@
 	}
 #endif
 
+// Simple function to check a string 's' has at least 'n' characters
+static inline bool simplejson_wcsnlen(const wchar_t *s, size_t n) {
+	if (s == 0)
+		return false;
+
+	const wchar_t *save = s;
+	while (n-- > 0)
+	{
+		if (*(save++) == 0) return false;
+	}
+
+	return true;
+}
+
 // Custom types
 class JSONValue;
 typedef std::vector<JSONValue*> JSONArray;

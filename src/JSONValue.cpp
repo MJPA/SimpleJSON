@@ -59,7 +59,7 @@ JSONValue *JSONValue::Parse(const wchar_t **data)
 	}
 	
 	// Is it a boolean?
-	else if ((wcslen(*data) >= 4 && wcsncasecmp(*data, L"true", 4) == 0) || (wcslen(*data) >= 5 && wcsncasecmp(*data, L"false", 5) == 0))
+	else if ((simplejson_wcsnlen(*data, 4) && wcsncasecmp(*data, L"true", 4) == 0) || (simplejson_wcsnlen(*data, 5) && wcsncasecmp(*data, L"false", 5) == 0))
 	{
 		bool value = wcsncasecmp(*data, L"true", 4) == 0;
 		(*data) += value ? 4 : 5;
@@ -67,7 +67,7 @@ JSONValue *JSONValue::Parse(const wchar_t **data)
 	}
 	
 	// Is it a null?
-	else if (wcslen(*data) >= 4 && wcsncasecmp(*data, L"null", 4) == 0)
+	else if (simplejson_wcsnlen(*data, 4) && wcsncasecmp(*data, L"null", 4) == 0)
 	{
 		(*data) += 4;
 		return new JSONValue();

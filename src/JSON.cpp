@@ -174,7 +174,7 @@ bool JSON::ExtractString(const wchar_t **data, std::wstring &str)
 				case L'u':
 				{
 					// We need 5 chars (4 hex + the 'u') or its not valid
-					if (wcslen(*data) < 5)
+					if (!simplejson_wcsnlen(*data, 5))
 						return false;
 					
 					// Deal with the chars
