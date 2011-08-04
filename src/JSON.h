@@ -46,17 +46,28 @@
 #if defined(__APPLE__) || (defined(WIN32) && defined(__GNUC__))
 	#include <wctype.h>
 	#include <wchar.h>
-	#include <algorithm>
 	
-	static inline int wcsncasecmp (const wchar_t *s1, const wchar_t *s2, size_t n)
+	static inline int wcsncasecmp(const wchar_t *s1, const wchar_t *s2, size_t n)
 	{
-		if (!wcsncmp(s1, s2, n)) 
-			return 0;
+		int lc1  = 0;
+		int lc2  = 0;
 
-		std::wstring ws(s1), wws(s2);
-		transform(ws.begin(), ws.end(), ws.begin(), towlower);
-		transform(wws.begin(), wws.end(), wws.begin(), towlower);
-		return wcsncmp(ws.c_str(), wws.c_str(), n);
+		while (n--)
+		{
+			lc1 = towlower (*s1);
+			lc2 = towlower (*s2);
+
+			if (lc1 != lc2)
+				return (lc1 - lc2);
+
+			if (!lc1)
+				return 0;
+
+			++s1;
+			++s2;
+		}
+
+		return 0;
 	}
 #endif
 
