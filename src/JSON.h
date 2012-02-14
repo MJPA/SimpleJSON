@@ -42,8 +42,8 @@
 	#include <cstdlib>
 #endif
 
-// Mac compile fixes - from quaker66
-#if defined(__APPLE__) || (defined(WIN32) && defined(__GNUC__))
+// Mac compile fixes - from quaker66, Lion fix by dabrahams
+#if defined(__APPLE__) && __DARWIN_C_LEVEL < 200809L || (defined(WIN32) && defined(__GNUC__))
 	#include <wctype.h>
 	#include <wchar.h>
 	
