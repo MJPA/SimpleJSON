@@ -1,18 +1,18 @@
 /*
  * File JSON.cpp part of the SimpleJSON Library - http://mjpa.in/json
- * 
+ *
  * Copyright (C) 2010 Mike Anchor
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,7 +24,7 @@
 
 #include "JSON.h"
 
-/** 
+/**
  * Blocks off the public constructor
  *
  * @access private
@@ -117,7 +117,7 @@ std::wstring JSON::Stringify(const JSONValue *value)
 		return L"";
 }
 
-/** 
+/**
  * Skips over any whitespace characters (space, tab, \r or \n) defined by the JSON spec
  *
  * @access protected
@@ -134,7 +134,7 @@ bool JSON::SkipWhitespace(const wchar_t **data)
 	return **data != 0;
 }
 
-/** 
+/**
  * Extracts a JSON String as defined by the spec - "<some chars>"
  * Any escaped characters are swapped out for their unescaped values
  *
@@ -181,7 +181,7 @@ bool JSON::ExtractString(const wchar_t **data, std::wstring &str)
 					next_char = 0;
 					for (int i = 0; i < 4; i++)
 					{
-						// Do it first to move off the 'u' and leave us on the 
+						// Do it first to move off the 'u' and leave us on the
 						// final hex digit as we move on by one later on
 						(*data)++;
 						
@@ -235,7 +235,7 @@ bool JSON::ExtractString(const wchar_t **data, std::wstring &str)
 	return false;
 }
 
-/** 
+/**
  * Parses some text as though it is an integer
  *
  * @access protected
@@ -253,7 +253,7 @@ double JSON::ParseInt(const wchar_t **data)
 	return integer;
 }
 
-/** 
+/**
  * Parses some text as though it is a decimal
  *
  * @access protected
