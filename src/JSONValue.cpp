@@ -301,7 +301,7 @@ JSONValue *JSONValue::Parse(const wchar_t **data)
 	}
 }
 
-/** 
+/**
  * Basic constructor for creating a JSON Value of type NULL
  *
  * @access public
@@ -311,7 +311,7 @@ JSONValue::JSONValue(/*NULL*/)
 	type = JSONType_Null;
 }
 
-/** 
+/**
  * Basic constructor for creating a JSON Value of type String
  *
  * @access public
@@ -324,7 +324,7 @@ JSONValue::JSONValue(const wchar_t *m_char_value)
 	string_value = std::wstring(m_char_value);
 }
 
-/** 
+/**
  * Basic constructor for creating a JSON Value of type String
  *
  * @access public
@@ -337,7 +337,7 @@ JSONValue::JSONValue(const std::wstring &m_string_value)
 	string_value = m_string_value;
 }
 
-/** 
+/**
  * Basic constructor for creating a JSON Value of type Bool
  *
  * @access public
@@ -350,7 +350,7 @@ JSONValue::JSONValue(bool m_bool_value)
 	bool_value = m_bool_value;
 }
 
-/** 
+/**
  * Basic constructor for creating a JSON Value of type Number
  *
  * @access public
@@ -363,7 +363,7 @@ JSONValue::JSONValue(double m_number_value)
 	number_value = m_number_value;
 }
 
-/** 
+/**
  * Basic constructor for creating a JSON Value of type Array
  *
  * @access public
@@ -376,7 +376,7 @@ JSONValue::JSONValue(const JSONArray &m_array_value)
 	array_value = m_array_value;
 }
 
-/** 
+/**
  * Basic constructor for creating a JSON Value of type Object
  *
  * @access public
@@ -389,7 +389,7 @@ JSONValue::JSONValue(const JSONObject &m_object_value)
 	object_value = m_object_value;
 }
 
-/** 
+/**
  * The destructor for the JSON Value object
  * Handles deleting the objects in the array or the object value
  *
@@ -413,7 +413,7 @@ JSONValue::~JSONValue()
 	}
 }
 
-/** 
+/**
  * Checks if the value is a NULL
  *
  * @access public
@@ -425,7 +425,7 @@ bool JSONValue::IsNull() const
 	return type == JSONType_Null;
 }
 
-/** 
+/**
  * Checks if the value is a String
  *
  * @access public
@@ -437,7 +437,7 @@ bool JSONValue::IsString() const
 	return type == JSONType_String;
 }
 
-/** 
+/**
  * Checks if the value is a Bool
  *
  * @access public
@@ -449,7 +449,7 @@ bool JSONValue::IsBool() const
 	return type == JSONType_Bool;
 }
 
-/** 
+/**
  * Checks if the value is a Number
  *
  * @access public
@@ -461,7 +461,7 @@ bool JSONValue::IsNumber() const
 	return type == JSONType_Number;
 }
 
-/** 
+/**
  * Checks if the value is an Array
  *
  * @access public
@@ -473,7 +473,7 @@ bool JSONValue::IsArray() const
 	return type == JSONType_Array;
 }
 
-/** 
+/**
  * Checks if the value is an Object
  *
  * @access public
@@ -485,7 +485,7 @@ bool JSONValue::IsObject() const
 	return type == JSONType_Object;
 }
 
-/** 
+/**
  * Retrieves the String value of this JSONValue
  * Use IsString() before using this method.
  *
@@ -498,7 +498,7 @@ const std::wstring &JSONValue::AsString() const
 	return string_value;
 }
 
-/** 
+/**
  * Retrieves the Bool value of this JSONValue
  * Use IsBool() before using this method.
  *
@@ -511,7 +511,7 @@ bool JSONValue::AsBool() const
 	return bool_value;
 }
 
-/** 
+/**
  * Retrieves the Number value of this JSONValue
  * Use IsNumber() before using this method.
  *
@@ -524,7 +524,7 @@ double JSONValue::AsNumber() const
 	return number_value;
 }
 
-/** 
+/**
  * Retrieves the Array value of this JSONValue
  * Use IsArray() before using this method.
  *
@@ -537,7 +537,7 @@ const JSONArray &JSONValue::AsArray() const
 	return array_value;
 }
 
-/** 
+/**
  * Retrieves the Object value of this JSONValue
  * Use IsObject() before using this method.
  *
@@ -550,7 +550,7 @@ const JSONObject &JSONValue::AsObject() const
 	return object_value;
 }
 
-/** 
+/**
  * Retrieves the number of children of this JSONValue.
  * This number will be 0 or the actual number of children
  * if IsArray() or IsObject().
@@ -558,26 +558,28 @@ const JSONObject &JSONValue::AsObject() const
  * @access public
  *
  * @return The number of children.
-*/
+ */
 std::size_t JSONValue::CountChildren() const
 {
 	switch (type)
 	{
-	case JSONType_Array:
-		return array_value.size();
-	case JSONType_Object:
-		return object_value.size();
-	default:
-		return 0;
+		case JSONType_Array:
+			return array_value.size();
+		case JSONType_Object:
+			return object_value.size();
+		default:
+			return 0;
 	}
 }
 
-/** 
+/**
  * Checks if this JSONValue has a child at the given index.
  * Use IsArray() before using this method.
  *
  * @access public
-*/
+ *
+ * @return bool Returns true if the array has a value at the given index.
+ */
 bool JSONValue::HasChild(std::size_t index) const
 {
 	if (type == JSONType_Array)
@@ -590,13 +592,16 @@ bool JSONValue::HasChild(std::size_t index) const
 	}
 }
 
-/** 
-* Retrieves the child of this JSONValue at the given index.
-* Use IsArray() before using this method.
-*
-* @access public
-*/
-JSONValue* JSONValue::Child(std::size_t index)
+/**
+ * Retrieves the child of this JSONValue at the given index.
+ * Use IsArray() before using this method.
+ *
+ * @access public
+ *
+ * @return JSONValue* Returns JSONValue at the given index or NULL
+ *                    if it doesn't exist.
+ */
+JSONValue *JSONValue::Child(std::size_t index)
 {
 	if (index < array_value.size())
 	{
@@ -608,12 +613,14 @@ JSONValue* JSONValue::Child(std::size_t index)
 	}
 }
 
-/** 
-* Checks if this JSONValue as a child at the given key.
-* Use IsObject() before using this method.
-*
-* @access public
-*/
+/**
+ * Checks if this JSONValue has a child at the given key.
+ * Use IsObject() before using this method.
+ *
+ * @access public
+ *
+ * @return bool Returns true if the object has a value at the given key.
+ */
 bool JSONValue::HasChild(const wchar_t* name) const
 {
 	if (type == JSONType_Object)
@@ -626,12 +633,15 @@ bool JSONValue::HasChild(const wchar_t* name) const
 	}
 }
 
-/** 
-* Retrieves the child of this JSONValue at the given key.
-* Use IsObject() before using this method.
-*
-* @access public
-*/
+/**
+ * Retrieves the child of this JSONValue at the given key.
+ * Use IsObject() before using this method.
+ *
+ * @access public
+ *
+ * @return JSONValue* Returns JSONValue for the given key in the object
+ *                    or NULL if it doesn't exist.
+ */
 JSONValue* JSONValue::Child(const wchar_t* name)
 {
 	JSONObject::const_iterator it = object_value.find(name);
@@ -645,7 +655,7 @@ JSONValue* JSONValue::Child(const wchar_t* name)
 	}
 }
 
-/** 
+/**
  * Creates a JSON encoded string for the value with all necessary characters escaped
  *
  * @access public
@@ -722,7 +732,7 @@ std::wstring JSONValue::Stringify() const
 	return ret_string;
 }
 
-/** 
+/**
  * Creates a JSON encoded string with all required fields escaped
  * Works from http://www.ecma-internationl.org/publications/files/ECMA-ST/ECMA-262.pdf
  * Section 15.12.3.

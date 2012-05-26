@@ -63,15 +63,15 @@ class JSONValue
 
 		std::size_t CountChildren() const;
 		bool HasChild(std::size_t index) const;
-		JSONValue* Child(std::size_t index);
+		JSONValue *Child(std::size_t index);
 		bool HasChild(const wchar_t* name) const;
-		JSONValue* Child(const wchar_t* name);
+		JSONValue *Child(const wchar_t* name);
 
 		std::wstring Stringify() const;
 
 	protected:
 		static JSONValue *Parse(const wchar_t **data);
-	
+
 	private:
 		static std::wstring StringifyString(const std::wstring &str);
 	
