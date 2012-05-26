@@ -551,6 +551,101 @@ const JSONObject &JSONValue::AsObject() const
 }
 
 /** 
+ * Retrieves the number of children of this JSONValue.
+ * This number will be 0 or the actual number of children
+ * if IsArray() or IsObject().
+ *
+ * @access public
+ *
+ * @return The number of children.
+*/
+std::size_t JSONValue::CountChildren() const
+{
+	switch (type)
+	{
+	case JSONType_Array:
+		return array_value.size();
+	case JSONType_Object:
+		return object_value.size();
+	default:
+		return 0;
+	}
+}
+
+/** 
+ * Checks if this JSONValue has a child at the given index.
+ * Use IsArray() before using this method.
+ *
+ * @access public
+*/
+bool JSONValue::HasChild(std::size_t index) const
+{
+	if (type == JSONType_Array)
+	{
+		return index < array_value.size();
+	}
+	else
+	{
+		return false;
+	}
+}
+
+/** 
+* Retrieves the child of this JSONValue at the given index.
+* Use IsArray() before using this method.
+*
+* @access public
+*/
+JSONValue* JSONValue::Child(std::size_t index)
+{
+	if (index < array_value.size())
+	{
+		return array_value[index];
+	}
+	else
+	{
+		return NULL;
+	}
+}
+
+/** 
+* Checks if this JSONValue as a child at the given key.
+* Use IsObject() before using this method.
+*
+* @access public
+*/
+bool JSONValue::HasChild(const wchar_t* name) const
+{
+	if (type == JSONType_Object)
+	{
+		return object_value.find(name) != object_value.end();
+	}
+	else
+	{
+		return false;
+	}
+}
+
+/** 
+* Retrieves the child of this JSONValue at the given key.
+* Use IsObject() before using this method.
+*
+* @access public
+*/
+JSONValue* JSONValue::Child(const wchar_t* name)
+{
+	JSONObject::const_iterator it = object_value.find(name);
+	if (it != object_value.end())
+	{
+		return it->second;
+	}
+	else
+	{
+		return NULL;
+	}
+}
+
+/** 
  * Creates a JSON encoded string for the value with all necessary characters escaped
  *
  * @access public

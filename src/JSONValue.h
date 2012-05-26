@@ -47,7 +47,7 @@ class JSONValue
 		JSONValue(const JSONArray &m_array_value);
 		JSONValue(const JSONObject &m_object_value);
 		~JSONValue();
-		
+
 		bool IsNull() const;
 		bool IsString() const;
 		bool IsBool() const;
@@ -60,9 +60,15 @@ class JSONValue
 		double AsNumber() const;
 		const JSONArray &AsArray() const;
 		const JSONObject &AsObject() const;
-		
+
+		std::size_t CountChildren() const;
+		bool HasChild(std::size_t index) const;
+		JSONValue* Child(std::size_t index);
+		bool HasChild(const wchar_t* name) const;
+		JSONValue* Child(const wchar_t* name);
+
 		std::wstring Stringify() const;
-		
+
 	protected:
 		static JSONValue *Parse(const wchar_t **data);
 	
