@@ -582,6 +582,7 @@ std::wstring JSONValue::Stringify() const
 			else
 			{
 				std::wstringstream ss;
+				ss.precision(15);
 				ss << number_value;
 				ret_string = ss.str();
 			}
