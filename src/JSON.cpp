@@ -56,6 +56,10 @@ JSONValue *JSON::Parse(const char *data)
 			free(w_data);
 			return NULL;
 		}
+	#elif defined(ANDROID)
+		// mbstowcs seems to misbehave on android
+		for(size_t i = 0; i<length; i++)
+			w_data[i] = (wchar_t)data[i];
 	#else
 		if (mbstowcs(w_data, data, length) == (size_t)-1)
 		{

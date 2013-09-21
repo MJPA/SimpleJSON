@@ -43,7 +43,7 @@
 #endif
 
 // Mac compile fixes - from quaker66, Lion fix by dabrahams
-#if defined(__APPLE__) && __DARWIN_C_LEVEL < 200809L || (defined(WIN32) && defined(__GNUC__))
+#if defined(__APPLE__) && __DARWIN_C_LEVEL < 200809L || (defined(WIN32) && defined(__GNUC__)) || defined(ANDROID)
 	#include <wctype.h>
 	#include <wchar.h>
 	
