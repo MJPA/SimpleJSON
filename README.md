@@ -22,6 +22,6 @@ free to contact me by visiting my site at http://mjpa.co.uk
 Notes
 -----
 
-If building for Android and using Visual Studio, make sure "Ignore All Default 
-Libraries" is set to "No". The setting can be changed by going Settings -> 
-Configuration Properties -> Linker -> Input.
+If building for Android and using Visual Studio, make sure `Ignore All Default 
+Libraries` is set to `No`. The setting can be changed by going `Settings -> 
+Configuration Properties -> Linker -> Input`.
