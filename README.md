@@ -1,3 +1,6 @@
+About
+-----
+
 SimpleJSON is a simple JSON library written in C++. It is designed to be simple
 to use and be cross platform.
 
@@ -15,3 +18,10 @@ The library requires no 3rd party libraries and so can be dropped into any
 existing project effortlessly. It has been tested on Linux and Windows
 (using VS2008), if you come across any issues with using it on any system, feel
 free to contact me by visiting my site at http://mjpa.co.uk
+
+Notes
+-----
+
+If building for Android and using Visual Studio, make sure "Ignore All Default 
+Libraries" is set to "No". The setting can be changed by going Settings -> 
+Configuration Properties -> Linker -> Input.
