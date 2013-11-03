@@ -660,12 +660,33 @@ JSONValue* JSONValue::Child(const wchar_t* name)
  *
  * @access public
  *
+ * @param bool prettyprint Enable prettyprint
+ *
  * @return std::wstring Returns the JSON string
  */
-std::wstring JSONValue::Stringify() const
+std::wstring JSONValue::Stringify(bool const prettyprint) const
+{
+	size_t const indentDepth = prettyprint ? 1 : 0;
+	return StringifyImpl(indentDepth);
+}
+
+
+/**
+ * Creates a JSON encoded string for the value with all necessary characters escaped
+ *
+ * @access private
+ *
+ * @param size_t indentDepth The prettyprint indentation depth (0 : no prettyprint)
+ *
+ * @return std::wstring Returns the JSON string
+ */
+std::wstring JSONValue::StringifyImpl(size_t const indentDepth) const
 {
 	std::wstring ret_string;
-	
+	size_t const indentDepth1 = indentDepth ? indentDepth + 1 : 0;
+	std::wstring const indentStr = Indent(indentDepth);
+	std::wstring const indentStr1 = Indent(indentDepth1);
+
 	switch (type)
 	{
 		case JSONType_Null:
@@ -696,35 +717,35 @@ std::wstring JSONValue::Stringify() const
 		
 		case JSONType_Array:
 		{
-			ret_string = L"[";
+			ret_string = indentDepth ? L"[\n" + indentStr1 : L"[";
 			JSONArray::const_iterator iter = array_value.begin();
 			while (iter != array_value.end())
 			{
-				ret_string += (*iter)->Stringify();
-				
+				ret_string += (*iter)->StringifyImpl(indentDepth1);
+
 				// Not at the end - add a separator
 				if (++iter != array_value.end())
 					ret_string += L",";
 			}
-			ret_string += L"]";
+			ret_string += indentDepth ? L"\n" + indentStr + L"]" : L"]";
 			break;
 		}
 		
 		case JSONType_Object:
 		{
-			ret_string = L"{";
+			ret_string = indentDepth ? L"{\n" + indentStr1 : L"{";
 			JSONObject::const_iterator iter = object_value.begin();
 			while (iter != object_value.end())
 			{
 				ret_string += StringifyString((*iter).first);
 				ret_string += L":";
-				ret_string += (*iter).second->Stringify();
-				
+				ret_string += (*iter).second->StringifyImpl(indentDepth1);
+
 				// Not at the end - add a separator
 				if (++iter != object_value.end())
 					ret_string += L",";
 			}
-			ret_string += L"}";
+			ret_string += indentDepth ? L"\n" + indentStr + L"}" : L"}";
 			break;
 		}
 	}
@@ -800,4 +821,21 @@ std::wstring JSONValue::StringifyString(const std::wstring &str)
 	
 	str_out += L"\"";
 	return str_out;
+}
+
+/**
+* Creates the indentation string for the depth given
+*
+* @access private
+*
+* @param size_t indent The prettyprint indentation depth (0 : no indentation)
+*
+* @return std::wstring Returns the string
+*/
+std::wstring JSONValue::Indent(size_t depth)
+{
+	const size_t indent_step = 2;
+	depth ? --depth : 0;
+	std::wstring indentStr(depth * indent_step, ' ');
+	return indentStr;
 }

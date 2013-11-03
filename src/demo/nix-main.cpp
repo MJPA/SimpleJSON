@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 	}
 	
 	// Parse + echo?
-	else if (mode == "-e")
+	else if (mode == "-e" || mode == "-p")
 	{
 		// Get the stdin data
 		cin >> noskipws;
@@ -80,24 +80,29 @@ int main(int argc, char **argv)
 		if ((value = JSON::Parse(results.c_str())) == NULL)
 			wcout << L"Code entered is *NOT* valid.";
 		else
-			wcout << value->Stringify();
+		{
+			bool const prettyprint = (mode == "-p");
+			wcout << value->Stringify(prettyprint);
+		}
 		wcout << endl;
 
 		if (value) delete value;
 	}
-	
-	// Example 1?
+
+	// Example ?
 	else if (mode == "-ex1")
 	{
 		example1();
 	}
-	
-	// Example 2?
 	else if (mode == "-ex2")
 	{
 		example2();
 	}
-	
+	else if (mode == "-ex3")
+	{
+		example3();
+	}
+
 	// Test cases?
 	else if (mode == "-t")
 	{
@@ -112,8 +117,10 @@ int main(int argc, char **argv)
 		wcout << L"\t-v\tVerify JSON string is *valid* via stdin" << endl;
 		wcout << L"\t-f\tVerify JSON string is *invalid* via stdin" << endl;
 		wcout << L"\t-e\tVerify JSON string via stdin and echo it back using Stringify()" << endl;
+		wcout << L"\t-p\tVerify JSON string via stdin and prettyprint it using Stringify(true)" << endl;
 		wcout << L"\t-ex1\tRun example 1 - Example of how to extract data from the JSONValue object" << endl;
 		wcout << L"\t-ex2\tRun example 2 - Building a JSONValue from nothing" << endl;
+		wcout << L"\t-ex3\tRun example 3 - Compact vs. prettyprint" << endl;
 		wcout << L"\t-t\tRun test cases" << endl;
 		wcout << endl;
 		wcout << L"Only one option can be used at a time." << endl;
