@@ -7,35 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9DE566A118259E0A000B32B4 /* example.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5669818259E0A000B32B4 /* example.cpp */; };
-		9DE566A218259E0A000B32B4 /* nix-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5669A18259E0A000B32B4 /* nix-main.cpp */; };
-		9DE566A318259E0A000B32B4 /* testcases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5669B18259E0A000B32B4 /* testcases.cpp */; };
-		9DE566A518259E0A000B32B4 /* JSON.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5669D18259E0A000B32B4 /* JSON.cpp */; };
-		9DE566A618259E0A000B32B4 /* JSONValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5669F18259E0A000B32B4 /* JSONValue.cpp */; };
+		9D82EB98182AA0A600296124 /* example.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D82EB8F182AA0A600296124 /* example.cpp */; };
+		9D82EB99182AA0A600296124 /* nix-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D82EB91182AA0A600296124 /* nix-main.cpp */; };
+		9D82EB9A182AA0A600296124 /* testcases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D82EB92182AA0A600296124 /* testcases.cpp */; };
+		9D82EB9C182AA0A600296124 /* JSON.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D82EB94182AA0A600296124 /* JSON.cpp */; };
+		9D82EB9D182AA0A600296124 /* JSONValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D82EB96182AA0A600296124 /* JSONValue.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		9DE5668718259D9F000B32B4 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
+			buildActionMask = 12;
+			dstPath = "";
 			dstSubfolderSpec = 0;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9DE5668918259D9F000B32B4 /* xcode5 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xcode5; sourceTree = BUILT_PRODUCTS_DIR; };
-		9DE5669818259E0A000B32B4 /* example.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example.cpp; sourceTree = "<group>"; };
-		9DE5669918259E0A000B32B4 /* functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = functions.h; sourceTree = "<group>"; };
-		9DE5669A18259E0A000B32B4 /* nix-main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "nix-main.cpp"; sourceTree = "<group>"; };
-		9DE5669B18259E0A000B32B4 /* testcases.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testcases.cpp; sourceTree = "<group>"; };
-		9DE5669D18259E0A000B32B4 /* JSON.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSON.cpp; sourceTree = "<group>"; };
-		9DE5669E18259E0A000B32B4 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		9DE5669F18259E0A000B32B4 /* JSONValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONValue.cpp; sourceTree = "<group>"; };
-		9DE566A018259E0A000B32B4 /* JSONValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValue.h; sourceTree = "<group>"; };
+		9D82EB8F182AA0A600296124 /* example.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example.cpp; sourceTree = "<group>"; };
+		9D82EB90182AA0A600296124 /* functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = functions.h; sourceTree = "<group>"; };
+		9D82EB91182AA0A600296124 /* nix-main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "nix-main.cpp"; sourceTree = "<group>"; };
+		9D82EB92182AA0A600296124 /* testcases.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testcases.cpp; sourceTree = "<group>"; };
+		9D82EB94182AA0A600296124 /* JSON.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSON.cpp; sourceTree = "<group>"; };
+		9D82EB95182AA0A600296124 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		9D82EB96182AA0A600296124 /* JSONValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONValue.cpp; sourceTree = "<group>"; };
+		9D82EB97182AA0A600296124 /* JSONValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValue.h; sourceTree = "<group>"; };
+		9DE5668918259D9F000B32B4 /* SimpleJSONdemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SimpleJSONdemo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,10 +49,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D82EB8D182AA0A600296124 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				9D82EB8E182AA0A600296124 /* demo */,
+				9D82EB94182AA0A600296124 /* JSON.cpp */,
+				9D82EB95182AA0A600296124 /* JSON.h */,
+				9D82EB96182AA0A600296124 /* JSONValue.cpp */,
+				9D82EB97182AA0A600296124 /* JSONValue.h */,
+			);
+			name = src;
+			path = ../src;
+			sourceTree = "<group>";
+		};
+		9D82EB8E182AA0A600296124 /* demo */ = {
+			isa = PBXGroup;
+			children = (
+				9D82EB8F182AA0A600296124 /* example.cpp */,
+				9D82EB90182AA0A600296124 /* functions.h */,
+				9D82EB91182AA0A600296124 /* nix-main.cpp */,
+				9D82EB92182AA0A600296124 /* testcases.cpp */,
+			);
+			path = demo;
+			sourceTree = "<group>";
+		};
 		9DE5668018259D9F000B32B4 = {
 			isa = PBXGroup;
 			children = (
-				9DE5668B18259D9F000B32B4 /* xcode5 */,
+				9D82EB8D182AA0A600296124 /* src */,
 				9DE5668A18259D9F000B32B4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,41 +84,9 @@
 		9DE5668A18259D9F000B32B4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9DE5668918259D9F000B32B4 /* xcode5 */,
+				9DE5668918259D9F000B32B4 /* SimpleJSONdemo */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		9DE5668B18259D9F000B32B4 /* xcode5 */ = {
-			isa = PBXGroup;
-			children = (
-				9DE5669618259E0A000B32B4 /* src */,
-			);
-			path = xcode5;
-			sourceTree = "<group>";
-		};
-		9DE5669618259E0A000B32B4 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				9DE5669718259E0A000B32B4 /* demo */,
-				9DE5669D18259E0A000B32B4 /* JSON.cpp */,
-				9DE5669E18259E0A000B32B4 /* JSON.h */,
-				9DE5669F18259E0A000B32B4 /* JSONValue.cpp */,
-				9DE566A018259E0A000B32B4 /* JSONValue.h */,
-			);
-			name = src;
-			path = ../../src;
-			sourceTree = "<group>";
-		};
-		9DE5669718259E0A000B32B4 /* demo */ = {
-			isa = PBXGroup;
-			children = (
-				9DE5669818259E0A000B32B4 /* example.cpp */,
-				9DE5669918259E0A000B32B4 /* functions.h */,
-				9DE5669A18259E0A000B32B4 /* nix-main.cpp */,
-				9DE5669B18259E0A000B32B4 /* testcases.cpp */,
-			);
-			path = demo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,7 +106,7 @@
 			);
 			name = xcode5;
 			productName = xcode5;
-			productReference = 9DE5668918259D9F000B32B4 /* xcode5 */;
+			productReference = 9DE5668918259D9F000B32B4 /* SimpleJSONdemo */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -148,11 +140,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DE566A218259E0A000B32B4 /* nix-main.cpp in Sources */,
-				9DE566A318259E0A000B32B4 /* testcases.cpp in Sources */,
-				9DE566A118259E0A000B32B4 /* example.cpp in Sources */,
-				9DE566A518259E0A000B32B4 /* JSON.cpp in Sources */,
-				9DE566A618259E0A000B32B4 /* JSONValue.cpp in Sources */,
+				9D82EB99182AA0A600296124 /* nix-main.cpp in Sources */,
+				9D82EB9A182AA0A600296124 /* testcases.cpp in Sources */,
+				9D82EB98182AA0A600296124 /* example.cpp in Sources */,
+				9D82EB9C182AA0A600296124 /* JSON.cpp in Sources */,
+				9D82EB9D182AA0A600296124 /* JSONValue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,14 +222,14 @@
 		9DE5669318259D9F000B32B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SimpleJSONdemo;
 			};
 			name = Debug;
 		};
 		9DE5669418259D9F000B32B4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SimpleJSONdemo;
 			};
 			name = Release;
 		};
@@ -260,6 +252,7 @@
 				9DE5669418259D9F000B32B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
