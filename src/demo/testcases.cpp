@@ -144,5 +144,19 @@ void run_tests()
 	}
 	print_out(test_output.c_str());
 	
+	// Test case for issue #20.
+	test_output = wstring(L"| Testing for valid encoding of ASCII 126") + wstring(DESC_LENGTH - 39, L' ') + wstring(L" | ");
+	wstring issue_20_test = L"{\"test\":\"Value \\u00E0\"}";
+	json_value = JSON::Parse(issue_20_test.c_str());
+	if (json_value && json_value->Stringify() == issue_20_test)
+	{
+		test_output += wstring(L"passed |\r\n");
+	}
+	else
+	{
+		test_output += wstring(L"failed |\r\n");
+	}
+	print_out(test_output.c_str());
+	
 	print_out(vert_sep.c_str());
 }
