@@ -6,6 +6,7 @@ void print_out(const wchar_t *output);
 // Example functions
 void example1();
 void example2();
+void example3();
 
 // Test case runner
 void run_tests();

@@ -67,14 +67,16 @@ class JSONValue
 		bool HasChild(const wchar_t* name) const;
 		JSONValue *Child(const wchar_t* name);
 
-		std::wstring Stringify() const;
+		std::wstring Stringify(bool const prettyprint = false) const;
 
 	protected:
 		static JSONValue *Parse(const wchar_t **data);
 
 	private:
 		static std::wstring StringifyString(const std::wstring &str);
-	
+		std::wstring StringifyImpl(size_t const indentDepth) const;
+		static std::wstring Indent(size_t depth);
+
 		JSONType type;
 		std::wstring string_value;
 		bool bool_value;
