@@ -43,10 +43,10 @@ int main(int argc, char **argv)
 {
 	// Required for utf8 chars
 	setlocale(LC_CTYPE, "");
-	
+
 	// The mode...
 	string mode = argc != 2 ? "" : argv[1];
-	
+
 	// Verifying?
 	if (mode == "-v" || mode == "-f")
 	{
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 		istream_iterator<char> it(cin);
 		istream_iterator<char> end;
 		string results(it, end);
-		
+
 		// Parse it, print if the test is good/bad
 		JSONValue *value = JSON::Parse(results.c_str());
 		if ((value != NULL && mode == "-v") || (value == NULL && mode == "-f"))
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
 
 		if (value) delete value;
 	}
-	
+
 	// Parse + echo?
 	else if (mode == "-e" || mode == "-p")
 	{
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
 		istream_iterator<char> it(cin);
 		istream_iterator<char> end;
 		string results(it, end);
-		
+
 		// Parse it & echo if it's valid
 		JSONValue *value = NULL;
 		if ((value = JSON::Parse(results.c_str())) == NULL)
@@ -102,13 +102,17 @@ int main(int argc, char **argv)
 	{
 		example3();
 	}
+	else if (mode == "-ex4")
+	{
+		example4();
+	}
 
 	// Test cases?
 	else if (mode == "-t")
 	{
 		run_tests();
 	}
-	
+
 	// Help!
 	else
 	{
@@ -121,10 +125,11 @@ int main(int argc, char **argv)
 		wcout << L"\t-ex1\tRun example 1 - Example of how to extract data from the JSONValue object" << endl;
 		wcout << L"\t-ex2\tRun example 2 - Building a JSONValue from nothing" << endl;
 		wcout << L"\t-ex3\tRun example 3 - Compact vs. prettyprint" << endl;
+		wcout << L"\t-ex4\tRun example 4 - Example of fetching the keys in an object" << endl;
 		wcout << L"\t-t\tRun test cases" << endl;
 		wcout << endl;
 		wcout << L"Only one option can be used at a time." << endl;
 	}
-	
+
 	return 0;
 }

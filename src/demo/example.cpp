@@ -51,7 +51,7 @@ void example1()
 {
 	// Parse example data
 	JSONValue *value = JSON::Parse(EXAMPLE);
-		
+
 	// Did it go wrong?
 	if (value == NULL)
 	{
@@ -68,7 +68,7 @@ void example1()
 		else
 		{
 			root = value->AsObject();
-			
+
 			// Retrieving a string
 			if (root.find(L"string_name") != root.end() && root[L"string_name"]->IsString())
 			{
@@ -77,7 +77,7 @@ void example1()
 				print_out(root[L"string_name"]->AsString().c_str());
 				print_out(L"\r\n\r\n");
 			}
-		
+
 			// Retrieving a boolean
 			if (root.find(L"bool_second") != root.end() && root[L"bool_second"]->IsBool())
 			{
@@ -86,7 +86,7 @@ void example1()
 				print_out(root[L"bool_second"]->AsBool() ? L"it's true!" : L"it's false!");
 				print_out(L"\r\n\r\n");
 			}
-			
+
 			// Retrieving an array
 			if (root.find(L"array_letters") != root.end() && root[L"array_letters"]->IsArray())
 			{
@@ -101,7 +101,7 @@ void example1()
 				}
 				print_out(L"\r\n");
 			}
-			
+
 			// Retrieving nested object
 			if (root.find(L"sub_object") != root.end() && root[L"sub_object"]->IsObject())
 			{
@@ -120,20 +120,20 @@ void example1()
 void example2()
 {
 	JSONObject root;
-		
+
 	// Adding a string
 	root[L"test_string"] = new JSONValue(L"hello world");
-		
+
 	// Create a random integer array
 	JSONArray array;
 	srand((unsigned)time(0));
 	for (int i = 0; i < 10; i++)
 		array.push_back(new JSONValue((double)(rand() % 100)));
 	root[L"sample_array"] = new JSONValue(array);
-		
+
 	// Create a value
 	JSONValue *value = new JSONValue(root);
-		
+
 	// Print it
 	print_out(value->Stringify().c_str());
 
@@ -174,4 +174,53 @@ void example3()
 
 	// Clean up
 	delete value;
+}
+
+// Example 4 : List keys in an object.
+void example4()
+{
+	// Parse the example.
+	JSONValue *main_object = JSON::Parse(EXAMPLE);
+	if (main_object == NULL)
+	{
+		print_out(L"Example code failed to parse, did you change it?\r\n");
+	}
+	else if (!main_object->IsObject())
+	{
+		print_out(L"Example code is not an object, did you change it?\r\n");
+		delete main_object;
+	}
+	else
+	{
+		// Print the main object.
+		print_out(L"Main object:\r\n");
+		print_out(main_object->Stringify(true).c_str());
+		print_out(L"-----------\r\n");
+
+		// Fetch the keys and print them out.
+		std::vector<std::wstring> keys = main_object->ObjectKeys();
+
+		std::vector<std::wstring>::iterator iter = keys.begin();
+		while (iter != keys.end())
+		{
+			print_out(L"Key: ");
+			print_out((*iter).c_str());
+			print_out(L"\r\n");
+
+			// Get the key's value.
+			JSONValue *key_value = main_object->Child((*iter).c_str());
+			if (key_value)
+			{
+				print_out(L"Value: ");
+				print_out(key_value->Stringify().c_str());
+				print_out(L"\r\n");
+				print_out(L"-----------\r\n");
+			}
+
+			// Next key.
+			iter++;
+		}
+
+		delete main_object;
+	}
 }

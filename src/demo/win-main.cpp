@@ -106,6 +106,18 @@ int CALLBACK DialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					example2();
 					break;
 
+				case IDC_EX3:
+					extern const wchar_t *EXAMPLE;
+					SetWindowText(GetDlgItem(hDlg, IDC_INPUT), EXAMPLE);
+					example3();
+					break;
+
+				case IDC_EX4:
+					extern const wchar_t *EXAMPLE;
+					SetWindowText(GetDlgItem(hDlg, IDC_INPUT), EXAMPLE);
+					example4();
+					break;
+
 				case IDC_TESTCASES:
 					SetWindowText(GetDlgItem(hWnd, IDC_INPUT), L"");
 					run_tests();
@@ -127,7 +139,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	wchar_t *last_slash = wcsrchr(progdir, L'\\');
 	if (last_slash) *(++last_slash) = 0;
 	SetCurrentDirectory(progdir);
-	
+
 	DialogBox(hInstance, MAKEINTRESOURCE(IDD_JSONDEMO), NULL, DialogProc);
 	return 0;
 }

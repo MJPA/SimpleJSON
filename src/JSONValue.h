@@ -37,7 +37,7 @@ enum JSONType { JSONType_Null, JSONType_String, JSONType_Bool, JSONType_Number, 
 class JSONValue
 {
 	friend class JSON;
-	
+
 	public:
 		JSONValue(/*NULL*/);
 		JSONValue(const wchar_t *m_char_value);
@@ -54,7 +54,7 @@ class JSONValue
 		bool IsNumber() const;
 		bool IsArray() const;
 		bool IsObject() const;
-		
+
 		const std::wstring &AsString() const;
 		bool AsBool() const;
 		double AsNumber() const;
@@ -66,6 +66,7 @@ class JSONValue
 		JSONValue *Child(std::size_t index);
 		bool HasChild(const wchar_t* name) const;
 		JSONValue *Child(const wchar_t* name);
+		std::vector<std::wstring> ObjectKeys() const;
 
 		std::wstring Stringify(bool const prettyprint = false) const;
 
