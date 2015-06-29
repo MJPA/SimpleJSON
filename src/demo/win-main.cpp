@@ -91,7 +91,7 @@ int CALLBACK DialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 						delete value;
 					}
 
-					delete text;
+					delete[] text;
 					break;
 				}
 
