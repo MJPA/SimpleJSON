@@ -69,7 +69,6 @@ class JSONValue
 		std::vector<std::wstring> ObjectKeys() const;
 
 		std::wstring Stringify(bool const prettyprint = false) const;
-
 	protected:
 		static JSONValue *Parse(const wchar_t **data);
 

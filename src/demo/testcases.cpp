@@ -62,7 +62,7 @@ bool get_file(string filename, wstring &description, wstring &data)
 	getline(in, description);
 	if (description.length() > DESC_LENGTH)
 		description.resize(DESC_LENGTH);
-	
+
 	wstring line;
 	data = L"";
 	while (getline(in, line))
@@ -86,14 +86,14 @@ void run_test_type(bool type)
 		stream.str("");
 		stream << "test_cases/" << (type ? "pass" : "fail") << (++test) << ".json";
 		if (get_file(stream.str(), name, data) == false) break;
-		
+
 		print_out(L"| ");
-		
+
 		wstream.str(L"");
 		wstream.setf(ios_base::left, ios_base::adjustfield);
 		wstream << setw(DESC_LENGTH) << name;
 		print_out(wstream.str().c_str());
-		
+
 		print_out(L" | ");
 		print_out(parse_check(data) != type ? L"failed" : L"passed");
 		print_out(L" |\r\n");
@@ -104,17 +104,17 @@ void run_test_type(bool type)
 void run_tests()
 {
 	wstring vert_sep = wstring(L"+-") + wstring(DESC_LENGTH, L'-') + wstring(L"-+--------+\r\n");
-	
+
 	print_out(vert_sep.c_str());
-	
+
 	wstring header = wstring(L"| Test case") + wstring(DESC_LENGTH - 9, L' ') + wstring(L" | Result |\r\n");
 	print_out(header.c_str());
-	
+
 	print_out(vert_sep.c_str());
-	
+
 	run_test_type(true);
 	run_test_type(false);
-	
+
 	// Static test for a very precise decimal number
 	double decimal = 40.9358215191158457340974;
 	JSONValue *json_value = JSON::Parse("40.9358215191158457340974");
@@ -129,7 +129,7 @@ void run_tests()
 		test_output += wstring(L"failed |\r\n");
 	}
 	print_out(test_output.c_str());
-	
+
 	// Static test for a decimal number with leading zeros
 	decimal = 1.00034985734000;
 	json_value = JSON::Parse("1.00034985734000");
@@ -143,7 +143,7 @@ void run_tests()
 		test_output += wstring(L"failed |\r\n");
 	}
 	print_out(test_output.c_str());
-	
+
 	// Test case for issue #20.
 	test_output = wstring(L"| Testing for valid encoding of ASCII 126") + wstring(DESC_LENGTH - 39, L' ') + wstring(L" | ");
 	wstring issue_20_test = L"{\"test\":\"Value \\u00E0\"}";

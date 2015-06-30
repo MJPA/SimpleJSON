@@ -850,14 +850,14 @@ std::wstring JSONValue::StringifyString(const std::wstring &str)
 }
 
 /**
-* Creates the indentation string for the depth given
-*
-* @access private
-*
-* @param size_t indent The prettyprint indentation depth (0 : no indentation)
-*
-* @return std::wstring Returns the string
-*/
+ * Creates the indentation string for the depth given
+ *
+ * @access private
+ *
+ * @param size_t indent The prettyprint indentation depth (0 : no indentation)
+ *
+ * @return std::wstring Returns the string
+ */
 std::wstring JSONValue::Indent(size_t depth)
 {
 	const size_t indent_step = 2;
