@@ -39,7 +39,7 @@
 
 using namespace std;
 
-// Defined in testcases.cpp
+// Defined in example.cpp
 extern const wchar_t* EXAMPLE;
 
 // Helper to do a quick parse check
