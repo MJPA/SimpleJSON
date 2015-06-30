@@ -390,6 +390,58 @@ JSONValue::JSONValue(const JSONObject &m_object_value)
 }
 
 /**
+ * Copy constructor to perform a deep copy of array / object values
+ *
+ * @access public
+ *
+ * @param JSONValue m_source The source JSONValue that is being copied
+ */
+JSONValue::JSONValue(const JSONValue &m_source)
+{
+	type = m_source.type;
+
+	switch (type)
+	{
+		case JSONType_String:
+			string_value = m_source.string_value;
+			break;
+
+		case JSONType_Bool:
+			bool_value = m_source.bool_value;
+			break;
+
+		case JSONType_Number:
+			number_value = m_source.number_value;
+			break;
+
+		case JSONType_Array:
+		{
+			JSONArray source_array = m_source.array_value;
+			JSONArray::iterator iter;
+			for (iter = source_array.begin(); iter != source_array.end(); iter++)
+				array_value.push_back(new JSONValue(**iter));
+			break;
+		}
+
+		case JSONType_Object:
+		{
+			JSONObject source_object = m_source.object_value;
+			JSONObject::iterator iter;
+			for (iter = source_object.begin(); iter != source_object.end(); iter++)
+			{
+				std::wstring name = (*iter).first;
+				object_value[name] = new JSONValue(*((*iter).second));
+			}
+			break;
+		}
+
+		case JSONType_Null:
+			// Nothing to do.
+			break;
+	}
+}
+
+/**
  * The destructor for the JSON Value object
  * Handles deleting the objects in the array or the object value
  *

@@ -39,6 +39,9 @@
 
 using namespace std;
 
+// Defined in testcases.cpp
+extern const wchar_t* EXAMPLE;
+
 // Helper to do a quick parse check
 bool parse_check(wstring str)
 {
@@ -157,6 +160,22 @@ void run_tests()
 		test_output += wstring(L"failed |\r\n");
 	}
 	print_out(test_output.c_str());
-	
+
+	// Test case for issue #24.
+	test_output = wstring(L"| Testing JSONValue passing as value") + wstring(DESC_LENGTH - 34, L' ') + wstring(L" | ");
+	JSONValue *value = JSON::Parse(EXAMPLE);
+	wstring json_check = value->Stringify();
+	JSONValue new_value(*value);
+	delete value;
+	if (new_value.Stringify() == json_check)
+	{
+		test_output += wstring(L"passed |\r\n");
+	}
+	else
+	{
+		test_output += wstring(L"failed |\r\n");
+	}
+	print_out(test_output.c_str());
+
 	print_out(vert_sep.c_str());
 }
