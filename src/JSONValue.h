@@ -79,11 +79,16 @@ class JSONValue
 		static std::wstring Indent(size_t depth);
 
 		JSONType type;
-		std::wstring string_value;
-		bool bool_value;
-		double number_value;
-		JSONArray array_value;
-		JSONObject object_value;
+
+		union
+		{
+			bool bool_value;
+			double number_value;
+			std::wstring *string_value;
+			JSONArray *array_value;
+			JSONObject *object_value;
+		};
+
 };
 
 #endif
