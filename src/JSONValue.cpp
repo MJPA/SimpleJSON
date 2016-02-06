@@ -313,8 +313,6 @@ JSONValue *JSONValue::Parse(const wchar_t **data)
 JSONValue::JSONValue(/*NULL*/)
 {
 	type = JSONType_Null;
-	bool_value = false;
-	number_value = 0;
 }
 
 /**
@@ -327,9 +325,7 @@ JSONValue::JSONValue(/*NULL*/)
 JSONValue::JSONValue(const wchar_t *m_char_value)
 {
 	type = JSONType_String;
-	string_value = std::wstring(m_char_value);
-	bool_value = false;
-	number_value = 0;
+	string_value = new std::wstring(std::wstring(m_char_value));
 }
 
 /**
@@ -342,9 +338,7 @@ JSONValue::JSONValue(const wchar_t *m_char_value)
 JSONValue::JSONValue(const std::wstring &m_string_value)
 {
 	type = JSONType_String;
-	string_value = m_string_value;
-	bool_value = false;
-	number_value = 0;
+	string_value = new std::wstring(m_string_value);
 }
 
 /**
@@ -358,7 +352,6 @@ JSONValue::JSONValue(bool m_bool_value)
 {
 	type = JSONType_Bool;
 	bool_value = m_bool_value;
-	number_value = 0;
 }
 
 /**
@@ -372,7 +365,6 @@ JSONValue::JSONValue(double m_number_value)
 {
 	type = JSONType_Number;
 	number_value = m_number_value;
-	bool_value = false;
 }
 
 /**
@@ -385,9 +377,7 @@ JSONValue::JSONValue(double m_number_value)
 JSONValue::JSONValue(const JSONArray &m_array_value)
 {
 	type = JSONType_Array;
-	array_value = m_array_value;
-	bool_value = false;
-	number_value = 0;
+	array_value = new JSONArray(m_array_value);
 }
 
 /**
@@ -400,9 +390,7 @@ JSONValue::JSONValue(const JSONArray &m_array_value)
 JSONValue::JSONValue(const JSONObject &m_object_value)
 {
 	type = JSONType_Object;
-	object_value = m_object_value;
-	bool_value = false;
-	number_value = 0;
+	object_value = new JSONObject(m_object_value);
 }
 
 /**
@@ -419,7 +407,7 @@ JSONValue::JSONValue(const JSONValue &m_source)
 	switch (type)
 	{
 		case JSONType_String:
-			string_value = m_source.string_value;
+			string_value = new std::wstring(*m_source.string_value);
 			break;
 
 		case JSONType_Bool:
@@ -432,21 +420,23 @@ JSONValue::JSONValue(const JSONValue &m_source)
 
 		case JSONType_Array:
 		{
-			JSONArray source_array = m_source.array_value;
+			JSONArray source_array = *m_source.array_value;
 			JSONArray::iterator iter;
+			array_value = new JSONArray();
 			for (iter = source_array.begin(); iter != source_array.end(); iter++)
-				array_value.push_back(new JSONValue(**iter));
+				array_value->push_back(new JSONValue(**iter));
 			break;
 		}
 
 		case JSONType_Object:
 		{
-			JSONObject source_object = m_source.object_value;
+			JSONObject source_object = *m_source.object_value;
+			object_value = new JSONObject();
 			JSONObject::iterator iter;
 			for (iter = source_object.begin(); iter != source_object.end(); iter++)
 			{
 				std::wstring name = (*iter).first;
-				object_value[name] = new JSONValue(*((*iter).second));
+				(*object_value)[name] = new JSONValue(*((*iter).second));
 			}
 			break;
 		}
@@ -468,16 +458,22 @@ JSONValue::~JSONValue()
 	if (type == JSONType_Array)
 	{
 		JSONArray::iterator iter;
-		for (iter = array_value.begin(); iter != array_value.end(); iter++)
+		for (iter = array_value->begin(); iter != array_value->end(); iter++)
 			delete *iter;
+		delete array_value;
 	}
 	else if (type == JSONType_Object)
 	{
 		JSONObject::iterator iter;
-		for (iter = object_value.begin(); iter != object_value.end(); iter++)
+		for (iter = object_value->begin(); iter != object_value->end(); iter++)
 		{
 			delete (*iter).second;
 		}
+		delete object_value;
+	}
+	else if (type == JSONType_String)
+	{
+		delete string_value;
 	}
 }
 
@@ -563,7 +559,7 @@ bool JSONValue::IsObject() const
  */
 const std::wstring &JSONValue::AsString() const
 {
-	return string_value;
+	return (*string_value);
 }
 
 /**
@@ -602,7 +598,7 @@ double JSONValue::AsNumber() const
  */
 const JSONArray &JSONValue::AsArray() const
 {
-	return array_value;
+	return (*array_value);
 }
 
 /**
@@ -615,7 +611,7 @@ const JSONArray &JSONValue::AsArray() const
  */
 const JSONObject &JSONValue::AsObject() const
 {
-	return object_value;
+	return (*object_value);
 }
 
 /**
@@ -632,9 +628,9 @@ std::size_t JSONValue::CountChildren() const
 	switch (type)
 	{
 		case JSONType_Array:
-			return array_value.size();
+			return array_value->size();
 		case JSONType_Object:
-			return object_value.size();
+			return object_value->size();
 		default:
 			return 0;
 	}
@@ -652,7 +648,7 @@ bool JSONValue::HasChild(std::size_t index) const
 {
 	if (type == JSONType_Array)
 	{
-		return index < array_value.size();
+		return index < array_value->size();
 	}
 	else
 	{
@@ -671,9 +667,9 @@ bool JSONValue::HasChild(std::size_t index) const
  */
 JSONValue *JSONValue::Child(std::size_t index)
 {
-	if (index < array_value.size())
+	if (index < array_value->size())
 	{
-		return array_value[index];
+		return (*array_value)[index];
 	}
 	else
 	{
@@ -693,7 +689,7 @@ bool JSONValue::HasChild(const wchar_t* name) const
 {
 	if (type == JSONType_Object)
 	{
-		return object_value.find(name) != object_value.end();
+		return object_value->find(name) != object_value->end();
 	}
 	else
 	{
@@ -712,8 +708,8 @@ bool JSONValue::HasChild(const wchar_t* name) const
  */
 JSONValue* JSONValue::Child(const wchar_t* name)
 {
-	JSONObject::const_iterator it = object_value.find(name);
-	if (it != object_value.end())
+	JSONObject::const_iterator it = object_value->find(name);
+	if (it != object_value->end())
 	{
 		return it->second;
 	}
@@ -737,8 +733,8 @@ std::vector<std::wstring> JSONValue::ObjectKeys() const
 
 	if (type == JSONType_Object)
 	{
-		JSONObject::const_iterator iter = object_value.begin();
-		while (iter != object_value.end())
+		JSONObject::const_iterator iter = object_value->begin();
+		while (iter != object_value->end())
 		{
 			keys.push_back(iter->first);
 
@@ -788,7 +784,7 @@ std::wstring JSONValue::StringifyImpl(size_t const indentDepth) const
 			break;
 
 		case JSONType_String:
-			ret_string = StringifyString(string_value);
+			ret_string = StringifyString(*string_value);
 			break;
 
 		case JSONType_Bool:
@@ -812,13 +808,13 @@ std::wstring JSONValue::StringifyImpl(size_t const indentDepth) const
 		case JSONType_Array:
 		{
 			ret_string = indentDepth ? L"[\n" + indentStr1 : L"[";
-			JSONArray::const_iterator iter = array_value.begin();
-			while (iter != array_value.end())
+			JSONArray::const_iterator iter = array_value->begin();
+			while (iter != array_value->end())
 			{
 				ret_string += (*iter)->StringifyImpl(indentDepth1);
 
 				// Not at the end - add a separator
-				if (++iter != array_value.end())
+				if (++iter != array_value->end())
 					ret_string += L",";
 			}
 			ret_string += indentDepth ? L"\n" + indentStr + L"]" : L"]";
@@ -828,15 +824,15 @@ std::wstring JSONValue::StringifyImpl(size_t const indentDepth) const
 		case JSONType_Object:
 		{
 			ret_string = indentDepth ? L"{\n" + indentStr1 : L"{";
-			JSONObject::const_iterator iter = object_value.begin();
-			while (iter != object_value.end())
+			JSONObject::const_iterator iter = object_value->begin();
+			while (iter != object_value->end())
 			{
 				ret_string += StringifyString((*iter).first);
 				ret_string += L":";
 				ret_string += (*iter).second->StringifyImpl(indentDepth1);
 
 				// Not at the end - add a separator
-				if (++iter != object_value.end())
+				if (++iter != object_value->end())
 					ret_string += L",";
 			}
 			ret_string += indentDepth ? L"\n" + indentStr + L"}" : L"}";
