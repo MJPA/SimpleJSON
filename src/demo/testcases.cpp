@@ -177,5 +177,18 @@ void run_tests()
 	}
 	print_out(test_output.c_str());
 
+	// Test case for int initialisation of JSONValue.
+	test_output = wstring(L"| Testing JSONValue int initialisation") + wstring(DESC_LENGTH - 36, L' ') + wstring(L" | ");
+	JSONValue int_test = JSONValue(42);
+	if (int_test.Stringify() == L"42")
+	{
+		test_output += wstring(L"passed |\r\n");
+	}
+	else
+	{
+		test_output += wstring(L"failed |\r\n");
+	}
+	print_out(test_output.c_str());
+
 	print_out(vert_sep.c_str());
 }
